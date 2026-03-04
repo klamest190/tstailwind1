@@ -13,6 +13,10 @@ const AppJournal1 = () => {
     setJournalText("");
   };
 
+  const deleteJournalEntry = (indexToDelete: number) => {
+    setJournalEntries((prev) => prev.filter((_, i) => i !== indexToDelete));
+  };
+
   return (
     <AppTemplate2>
       <h1 className="text-xl md:text-2xl font-semibold">My Journal</h1>
@@ -41,8 +45,17 @@ const AppJournal1 = () => {
         {journalEntries.map((entry, index) => (
           <div
             key={index}
-            className="bg-gray-50 rounded-xl p-3 border border-gray-200"
+            className="relative bg-gray-50 rounded-xl p-3 border border-gray-200"
           >
+            <button
+              aria-label="Delete entry"
+              title="Delete"
+              onClick={() => deleteJournalEntry(index)}
+              className="absolute top-2 right-2 flex items-center justify-center w-6 h-6 rounded-md
+             text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition"
+            >
+              X
+            </button>
             {entry}
           </div>
         ))}
