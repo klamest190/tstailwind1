@@ -1,7 +1,18 @@
+import { useState } from "react";
 import AppTemplate2 from "./AppTemplate2";
 import Button1 from "./Button1";
 
 const AppJournal1 = () => {
+  const [journalEntries, setJournalEntries] = useState<string[]>([]);
+  const [journalText, setJournalText] = useState<string>("");
+
+  const addJournalEntry = () => {
+    const text = journalText.trim();
+    if (!text) return;
+    setJournalEntries((prev) => [text, ...prev]);
+    setJournalText("");
+  };
+
   return (
     <AppTemplate2>
       <h1 className="text-xl md:text-2xl font-semibold">My Journal</h1>
@@ -9,13 +20,15 @@ const AppJournal1 = () => {
       {/* Input Section*/}
       <div className="space-y-3">
         <textarea
+          value={journalText}
+          onChange={(e) => setJournalText(e.target.value)}
           placeholder="Write your thoughts"
           className="w-full min-h-40 rounded-xl border
          border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus-ring-blue-500/30
          focus:border-blue-400 transition
         "
         ></textarea>
-        <Button1>Save Entry</Button1>
+        <Button1 onClick={addJournalEntry}>Save Entry</Button1>
       </div>
 
       {/* Divider*/}
@@ -25,15 +38,26 @@ const AppJournal1 = () => {
         <div className="space-y-3"></div>
       </div>
 
-      {/* Fake Entries*/}
+      {/* Journal Entries*/}
       <div className="space-y-3">
+        {journalEntries.map((entry, index) => (
+          <div
+            key={index}
+            className="bg-gray-50 rounded-xl p-3 border border-gray-200"
+          >
+            {entry}
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="space-y-3">
         <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
           Today i start building my jorunaling app
         </div>
         <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
           I like how clean the layout looks
         </div>
-      </div>
+      </div> */}
     </AppTemplate2>
   );
 };
