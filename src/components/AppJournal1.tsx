@@ -24,7 +24,7 @@ const AppJournal1 = () => {
           onChange={(e) => setJournalText(e.target.value)}
           placeholder="Write your thoughts"
           className="w-full min-h-40 rounded-xl border
-         border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus-ring-blue-500/30
+         border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30
          focus:border-blue-400 transition
         "
         ></textarea>
@@ -34,8 +34,6 @@ const AppJournal1 = () => {
       {/* Divider*/}
       <div className="border-t border-gray-200 pt-4">
         <h2 className="text-lg font-medium mb-3">Previous Entries</h2>
-
-        <div className="space-y-3"></div>
       </div>
 
       {/* Journal Entries*/}
