@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppTemplate2 from "./AppTemplate2";
 import Button1 from "./Button1";
 
 const AppJournal1 = () => {
-  const [journalEntries, setJournalEntries] = useState<string[]>([]);
+  function loadJournalEntries(): string[] {
+    const data = localStorage.getItem("journalEntries");
+    if (!data) return [];
+    try {
+      return JSON.parse(data);
+    } catch {
+      return [];
+    }
+  }
+
+  const [journalEntries, setJournalEntries] =
+    useState<string[]>(loadJournalEntries);
   const [journalText, setJournalText] = useState<string>("");
+
+  useEffect(() => {
+    console.log("Trigger2");
+    localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
+  }, [journalEntries]);
 
   const addJournalEntry = () => {
     const text = journalText.trim();
     if (!text) return;
     setJournalEntries((prev) => [text, ...prev]);
+
     setJournalText("");
   };
 
