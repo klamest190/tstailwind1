@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import AppTemplate2 from "./AppTemplate2";
 import Button1 from "./Button1";
 
 const AppJournal1 = () => {
-  function loadJournalEntries(): string[] {
+  const loadJournalEntries = (): string[] => {
     const data = localStorage.getItem("journalEntries");
     if (!data) return [];
     try {
@@ -11,7 +11,7 @@ const AppJournal1 = () => {
     } catch {
       return [];
     }
-  }
+  };
 
   const [journalEntries, setJournalEntries] =
     useState<string[]>(loadJournalEntries);
