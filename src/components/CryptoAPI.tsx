@@ -6,8 +6,6 @@ import axios from "axios";
 const CryptoAPI = () => {
   const cryptoURL =
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1";
-  const jokeURL = "https://official-joke-api.appspot.com/random_joke";
-  const chuckURL = "https://api.chucknorris.io/jokes/random";
 
   type Crypto = {
     name: string;
@@ -16,29 +14,17 @@ const CryptoAPI = () => {
   };
 
   const [crypto, setCrypto] = useState<Crypto[]>([]);
-  const [joke, setJoke] = useState({ setup: "", punchline: "" });
-  const [chuck, setChuck] = useState("");
 
   const loadCoins = async () => {
     const response = await axios.get(cryptoURL);
     setCrypto(response.data);
   };
 
-  const loadJoke = async () => {
-    const response = await axios.get(jokeURL);
-    setJoke(response?.data);
-  };
-
-  const loadChuck = async () => {
-    const response = await axios.get(chuckURL);
-    setChuck(response?.data?.value);
-  };
-
   return (
     <AppTemplate2>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Crypto Market</h2>
-        <Button1 onClick={loadCoins}>Load Coins</Button1>
+        <Button1 onClick={loadCoins}>Load API</Button1>
       </div>
 
       <div className="space-y-2">
