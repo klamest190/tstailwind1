@@ -1,15 +1,7 @@
-import "./App.css";
+import React from "react";
 
-function App() {
-  return (
-    <>
-      <div className="flex min-h-screen items-center justify-center bg-gray-900">
-        <h1 className="text-4xl font-bold text-blue-400">
-          Hallo Tailwind v4! 🚀
-        </h1>
-      </div>
-    </>
-  );
-}
+const App = () => {
+  return <div>App</div>;
+};
 
 export default App;

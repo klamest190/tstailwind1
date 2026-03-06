@@ -77,15 +77,6 @@ const AppJournal1 = () => {
           </div>
         ))}
       </div>
-
-      {/* <div className="space-y-3">
-        <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-          Today i start building my jorunaling app
-        </div>
-        <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-          I like how clean the layout looks
-        </div>
-      </div> */}
     </AppTemplate2>
   );
 };
