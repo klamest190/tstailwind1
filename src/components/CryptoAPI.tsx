@@ -45,7 +45,7 @@ const CryptoAPI = () => {
                     : "text-red-600"
                 }`}
               >
-                {entry.market_cap_change_percentage_24h} %
+                {entry.market_cap_change_percentage_24h.toFixed(2)} %
               </div>
             </div>
           </div>
