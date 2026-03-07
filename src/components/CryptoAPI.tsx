@@ -1,24 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppTemplate2 from "./AppTemplate2";
 import Button1 from "./Button1";
 import axios from "axios";
 
 const CryptoAPI = () => {
-  const cryptoURL =
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1";
-
   type Crypto = {
     name: string;
     current_price: number;
     market_cap_change_percentage_24h: number;
   };
 
-  const [crypto, setCrypto] = useState<Crypto[]>([]);
+  const cryptoURL =
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1";
+
+  const loadCryptoEntries = (): Crypto[] => {
+    const data = localStorage.getItem("cryptoEntries");
+    if (!data) return [];
+    try {
+      return JSON.parse(data);
+    } catch {
+      return [];
+    }
+  };
+
+  const [cryptoEntries, setCryptoEntries] =
+    useState<Crypto[]>(loadCryptoEntries);
 
   const loadCoins = async () => {
     const response = await axios.get(cryptoURL);
-    setCrypto(response.data);
+    setCryptoEntries(response.data);
   };
+
+  useEffect(() => {
+    localStorage.setItem("cryptoEntries", JSON.stringify(cryptoEntries));
+  }, [cryptoEntries]);
 
   return (
     <AppTemplate2>
@@ -28,7 +43,7 @@ const CryptoAPI = () => {
       </div>
 
       <div className="space-y-2">
-        {crypto.map((entry) => (
+        {cryptoEntries.map((entry) => (
           <div
             className="flex items-center justify-between bg-white
           border border-gray-200 rounded-xl px-4 py-3 shadow-sm"

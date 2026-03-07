@@ -18,7 +18,6 @@ const AppJournal1 = () => {
   const [journalText, setJournalText] = useState<string>("");
 
   useEffect(() => {
-    console.log("Trigger2");
     localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
   }, [journalEntries]);
 
